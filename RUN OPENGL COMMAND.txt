@@ -10,3 +10,5 @@ g++ circleMidPoint.cpp -o circleMidPoint -lglut -lGLU -lGL
 g++ number1.cpp -o number1 -lglut -lGLU -lGL
 
 g++ ass1.cpp -o ass1 -lglut -lGLU -lGL
+
+g++ test.cpp -o test -lglut -lGLU -lGL
