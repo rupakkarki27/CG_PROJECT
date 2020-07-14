@@ -10,7 +10,7 @@ void timer(int);
 
 float rotAngle;
 float characterOffset;
-float jumpOffset; bool jumping;
+float jumpOffset; bool jumping; float jumpCounter;
 float proneAngle; bool proning; int proneHold;
 float shiftAngle; int shifting;
 bool gameStarted = false;
@@ -67,17 +67,13 @@ void initCharacter()
         startRun();
     if(jumping)
     {
-        if(jumpOffset <= 2.0)
-            jumpOffset += 0.1;
-        else
+        jumpOffset = (3*jumpCounter) - (jumpCounter*jumpCounter);
+        jumpCounter += 0.07;
+        if(jumpOffset < 0){
             jumping = false;
-    }
-    else
-    {
-        if(jumpOffset > 0.0)
-            jumpOffset -= 0.1;
-        if(jumpOffset < 0.0)
-            jumpOffset = 0.0;
+            jumpCounter = 0;
+            jumpOffset = 0;
+        }
     }
     if(proning)
     {
@@ -87,14 +83,11 @@ void initCharacter()
             proneHold++;
         else
             proning = false;
-        if(jumpOffset > 0.0)
+        if(jumpCounter > 0.0)
         {
-            jumpOffset -= 0.4;
-            if(jumpOffset < 0.0)
-            {
-                jumpOffset = 0;
-                jumping = false;
-            }
+            if(jumpCounter < 1.5)
+                jumpCounter = 3.0 - jumpCounter;
+            jumpCounter += 0.2;
         }
 
     }
