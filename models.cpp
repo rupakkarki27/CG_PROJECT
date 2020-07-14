@@ -28,7 +28,7 @@ GLuint loadTexture(const char * filename){
 namespace models{
 	void track(){
 		if(trackTex == 0)
-			trackTex=loadTexture("train2.bmp");
+			trackTex=loadTexture("assets/train2.bmp");
 
 		glBindTexture(GL_TEXTURE_2D,trackTex);
 		glBegin(GL_QUADS);
@@ -42,7 +42,7 @@ namespace models{
 
 	void greenGround(){
 		if(grassTex==0)
-			grassTex=loadTexture("grass4.bmp");
+			grassTex=loadTexture("assets/grass4.bmp");
 		glBindTexture(GL_TEXTURE_2D,grassTex);
 		glColor3f(0.0,1.0,0.0);
 		glPushMatrix();
@@ -60,7 +60,7 @@ namespace models{
 
 	void sky(){
 		if(skyTex==0)
-			skyTex = loadTexture("sky_new.jpg");
+			skyTex = loadTexture("assets/sky_new.jpg");
 		glBindTexture(GL_TEXTURE_2D,skyTex);
 		glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);
 		glPushMatrix();
