@@ -1,6 +1,7 @@
 #include <GL/glu.h>
 #include <GL/gl.h>
 #include <GL/glut.h>
+#include "models.cpp"
 
 extern bool gameStarted;
 float handAngle = 110;
@@ -55,11 +56,11 @@ void drawCharacter(float angle, float jumpOffset, float proneAngle, float shiftA
     glutSolidSphere(0.25f, 20, 20);
 
     glPushMatrix();
-    glColor3f(0.0f, 0.0f, 0.0f);
+    glColor3f(0.0f, 0.0f, 0.0f); //eye
     glTranslatef(0.05f, 0.10f, 0.18f);
-    glutSolidSphere(0.05f, 10, 10);
+    glutSolidSphere(0.05f, 5, 5);
     glTranslatef(-0.1f, 0.0f, 0.0f);
-    glutSolidSphere(0.05f, 10, 10);
+    glutSolidSphere(0.05f, 5, 5);
     glPopMatrix();
 
     glColor3f(1.0f, 0.5f, 0.5f);
@@ -71,19 +72,21 @@ void drawCharacter(float angle, float jumpOffset, float proneAngle, float shiftA
 float trackOffset = 0;
 
 void drawScene(float offset) {
-
     glDisable(GL_LIGHTING);
     if(gameStarted)
         trackOffset += 0.4;
     if(trackOffset > 120)
         trackOffset = 0.0;
-    
+
     glPushMatrix();
     glTranslatef(0.0, 0.0, trackOffset);
     glTranslatef(offset, 0.0, 0.0);
 
-    glColor3f(1.0, 0.0, 0.0);
-
+    models::sky();
+    glColor3f(1.0, 1.0, 1.0);
+    models::track();
+    models::greenGround();
+    // MIDDLE TRACK (current track)
     glBegin(GL_QUADS);
     {
         glVertex3f(-0.7, 0, 10.0);
@@ -93,7 +96,8 @@ void drawScene(float offset) {
     }glEnd();
 
     glTranslatef(2.5, 0.0, 0.0);
-
+    models::track();
+    // RIGHT TRACK (current track)
     glBegin(GL_QUADS);
     {
         glVertex3f(-0.7, 0.0, 10.0);
@@ -103,6 +107,8 @@ void drawScene(float offset) {
     }glEnd();
 
     glTranslatef(-5.0, 0.0, 0.0);
+    models::track();
+    // LEFT TRACK (current track)
     glBegin(GL_QUADS);
     {
         glVertex3f(-0.7, 0.0, 10.0);
@@ -113,6 +119,7 @@ void drawScene(float offset) {
 
     glTranslatef(2.5, 0.0, -120.0);
 
+    // MIDDLE TRACK (upcoming track)
     glBegin(GL_QUADS);
     {
         glVertex3f(-0.7, 0.0, 10.0);
@@ -122,6 +129,8 @@ void drawScene(float offset) {
     }glEnd();
 
     glTranslatef(2.5, 0.0, 0.0);
+
+    // RIGHT TRACK (upcoming track)
     glBegin(GL_QUADS);
     {
         glVertex3f(-0.7, 0.0, 10.0);
@@ -129,8 +138,10 @@ void drawScene(float offset) {
         glVertex3f(0.7, 0.0, -100.0);
         glVertex3f(-0.7, 0.0, -100.0);
     }glEnd();
-    
+
     glTranslatef(-5.0, 0.0, 0.0);
+
+    // LEFT TRACK (upcoming track)
     glBegin(GL_QUADS);
     {
         glVertex3f(-0.7, 0.0, 10.0);
@@ -141,6 +152,7 @@ void drawScene(float offset) {
 
     glPopMatrix();
     glEnable(GL_LIGHTING);
+
 }
 
 void initCamera(){
@@ -149,5 +161,5 @@ void initCamera(){
 }
 
 void startRun(){
-    
+
 }

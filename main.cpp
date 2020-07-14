@@ -1,11 +1,12 @@
 #include <GL/glut.h>
 #include <iostream>
 #include "game.cpp"
-#define FPS 10
+
 void display();
 void reshape(int, int);
 void keyboard(unsigned char, int, int);
 void timer(int);
+
 
 float rotAngle;
 float characterOffset;
@@ -18,12 +19,16 @@ int position;
 
 void init()
 {
-    // glutFullScreen();
+    glEnable(GL_TEXTURE_2D);
     float lpos[] = {1.0, 3.0, 4.0};
+    float lamb[] = {0.7, 0.7, 0.7, 1.0};
+    float ldif[] = {1.0, 1.0, 1.0, 1.0};
     glEnable(GL_LIGHTING);
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LEQUAL);
     glLightfv(GL_LIGHT0, GL_POSITION, lpos);
+    glLightfv(GL_LIGHT0, GL_AMBIENT, lamb);
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, ldif);
     glEnable(GL_LIGHT0);
     glEnable(GL_COLOR_MATERIAL);
 }
@@ -39,6 +44,8 @@ void startGame()
 
 int main(int argc, char**argv)
 {
+
+    std::cout<<"Starting Game...\nPress `Space` to start!!\n\nPress q to quit.\n";
     glutInit(&argc, argv);
     glutInitWindowSize(600, 600);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH | GLUT_RGB);
@@ -89,7 +96,7 @@ void initCharacter()
                 jumping = false;
             }
         }
-        
+
     }
     else
     {
@@ -137,7 +144,7 @@ void initCharacter()
     {
         if(characterOffset < 0.15)
             characterOffset = 0.0;
-        else 
+        else
             characterOffset -= 0.15;
     }
 }
@@ -152,6 +159,7 @@ void display()
         initCharacter();
         drawCharacter(rotAngle, jumpOffset, proneAngle, shiftAngle);
     }
+
     glutSwapBuffers();
 }
 
@@ -161,7 +169,7 @@ void reshape(int w, int h)
     glViewport(0, 0, (GLsizei)w, (GLsizei)h);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(45, (GLdouble)w / (GLdouble)h, 1, 100);
+    gluPerspective(45, (GLdouble)w / (GLdouble)h, 1, 400);
     glMatrixMode(GL_MODELVIEW);
 }
 
@@ -201,6 +209,10 @@ void keyboard(unsigned char key, int x, int y)
             if(position < -1)
                 position = -1;
             break;
+        case 'q':
+            std::cout<<"\n\nExiting Game...";
+            std::cout<<"Thank You for playing!\n\n";
+            exit(1);
         default:
             break;
     }
@@ -211,3 +223,4 @@ void timer(int)
     glutPostRedisplay();
     glutTimerFunc(1000.0/60.0, timer, 0);
 }
+
