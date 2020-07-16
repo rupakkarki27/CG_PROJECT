@@ -5,6 +5,11 @@
 
 unsigned int trackTex,grassTex,skyTex;
 
+/*This Function uses stb_image.h to load and
+display the textures from images.
+It handles all the binding and processing 
+required to render the textures.
+*/
 GLuint loadTexture(const char * filename){
 	int width, height, nrChannels;
 	unsigned char *data = stbi_load(filename, &width, &height, &nrChannels, 0);
@@ -24,7 +29,12 @@ GLuint loadTexture(const char * filename){
 
 	return texture;
 }
-
+/*
+This namespace is used to render the 
+textures in their respective coordinates.
+It has all the functions required for 
+the textures like track, sky, greenGround.
+*/
 namespace models{
 	void track(){
 		if(trackTex == 0)

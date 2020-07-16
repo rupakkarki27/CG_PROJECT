@@ -17,6 +17,7 @@ bool gameStarted = false;
 
 int position;
 
+//Initialize the scene
 void init()
 {
     glEnable(GL_TEXTURE_2D);
@@ -33,6 +34,7 @@ void init()
     glEnable(GL_COLOR_MATERIAL);
 }
 
+//Start game with pre-defined conditions
 void startGame()
 {
     gameStarted = true;
@@ -42,6 +44,7 @@ void startGame()
     jumping = false, proning = false;
 }
 
+//Main function with the main loop
 int main(int argc, char**argv)
 {
 
@@ -59,6 +62,7 @@ int main(int argc, char**argv)
     return 0;
 }
 
+//Initializes the character after pressing space
 void initCharacter()
 {
     if(rotAngle < 180)
@@ -141,6 +145,8 @@ void initCharacter()
             characterOffset -= 0.15;
     }
 }
+
+//Window display for the game
 void display()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -156,6 +162,7 @@ void display()
     glutSwapBuffers();
 }
 
+//Window reshape Callback function
 void reshape(int w, int h)
 {
     glLoadIdentity();
@@ -166,10 +173,12 @@ void reshape(int w, int h)
     glMatrixMode(GL_MODELVIEW);
 }
 
+//Keyboard input function
 void keyboard(unsigned char key, int x, int y)
 {
     switch(key)
     {
+        // Char 32 is ASCII code for Space
         case char (32):
             if(!gameStarted)
                 startGame();
@@ -211,6 +220,7 @@ void keyboard(unsigned char key, int x, int y)
     }
 }
 
+//TImer callback function
 void timer(int)
 {
     glutPostRedisplay();

@@ -7,6 +7,7 @@ extern bool gameStarted;
 float handAngle = 110;
 short handDir = 1;
 
+//This functions draws the character
 void drawCharacter(float angle, float jumpOffset, float proneAngle, float shiftAngle) {
     if(handDir == 1 && handAngle > 50) {
         handAngle -= 3;
@@ -71,6 +72,7 @@ void drawCharacter(float angle, float jumpOffset, float proneAngle, float shiftA
 
 float trackOffset = 0;
 
+//This function draws the scene, especially the track
 void drawScene(float offset) {
     glDisable(GL_LIGHTING);
     if(gameStarted)
@@ -97,51 +99,25 @@ void drawScene(float offset) {
     models::track();
 
     // glBegin(GL_QUADS);
-    // {
-    //     glVertex3f(-0.7, 0.0, 10.0);
-    //     glVertex3f(0.7, 0.0, 10.0);
-    //     glVertex3f(0.7, 0.0, -100.0);
-    //     glVertex3f(-0.7, 0.0, -100.0);
-    // }glEnd();
 
     glTranslatef(2.5, 0.0, -120.0);
 
     // MIDDLE TRACK (upcoming track)
-    // glBegin(GL_QUADS);
-    // {
-    //     glVertex3f(-0.7, 0.0, 10.0);
-    //     glVertex3f(0.7, 0.0, 10.0);
-    //     glVertex3f(0.7, 0.0, -100.0);
-    //     glVertex3f(-0.7, 0.0, -100.0);
-    // }glEnd();
 
     glTranslatef(2.5, 0.0, 0.0);
 
     // RIGHT TRACK (upcoming track)  
-    // glBegin(GL_QUADS);
-    // {
-    //     glVertex3f(-0.7, 0.0, 10.0);
-    //     glVertex3f(0.7, 0.0, 10.0);
-    //     glVertex3f(0.7, 0.0, -100.0);
-    //     glVertex3f(-0.7, 0.0, -100.0);
-    // }glEnd();
 
     glTranslatef(-5.0, 0.0, 0.0);
 
     // LEFT TRACK (upcoming track)
-    // glBegin(GL_QUADS);
-    // {
-    //     glVertex3f(-0.7, 0.0, 10.0);
-    //     glVertex3f(0.7, 0.0, 10.0);
-    //     glVertex3f(0.7, 0.0, -100.0);
-    //     glVertex3f(-0.7, 0.0, -100.0);
-    // }glEnd();
 
     glPopMatrix();
     glEnable(GL_LIGHTING);
 
 }
 
+// Initializes the camera
 void initCamera(){
     glTranslatef(0.0, -2.0, -7.0);
     glRotatef(20, 1.0, 0.0, 0.0);
